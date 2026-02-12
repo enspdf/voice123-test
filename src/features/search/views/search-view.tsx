@@ -47,7 +47,6 @@ const SearchView = ({ attributes = [], providers = null }: SearchViewProps) => {
   const primary = theme.palette.primary.main;
   const primaryLight = theme.palette.primary.light;
   const bgDefault = theme.palette.background.default;
-  const paper = theme.palette.background.paper;
 
   const filterButton = (
     <FilterButton
@@ -62,10 +61,7 @@ const SearchView = ({ attributes = [], providers = null }: SearchViewProps) => {
       <SearchStoreHydrator providers={providers}>
         <FiltersUrlSync />
         <SearchQuerySync />
-        <FilterDrawer
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-        />
+        <FilterDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
         <Box
           sx={{
             position: "relative",
