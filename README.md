@@ -115,6 +115,20 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 
 ---
 
+### Branch: `TSK-5-setup-api-types-react-query-hooks`
+
+| Date       | Task / activity                                                            | Hours |
+| ---------- | -------------------------------------------------------------------------- | ----- |
+| 2026-02-12 | setup tests for react-query hooks, implement attributes and search queries | 2.5   |
+
+### Task list (this branch)
+
+- Generate response types for attributes route and search route with aggregations
+- Setup tests for react-query hooks
+- Build the attributes and search query hooks and fetch function to call endpoints.
+
+---
+
 ## Future improvements and recommendations
 
 - TODO
@@ -134,3 +148,5 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 - Design & update the theme provider for dark/light color based ont Voice123 colors.
 - Create audio wave canvas as background component to have better background color/animation instead of a plain color.
 - Generate dark/light mode colors and update base MUI theme.
+- Generate attributes and search types based on API response.
+- Setup the base to test the react-query hooks.
