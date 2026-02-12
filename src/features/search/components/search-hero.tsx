@@ -1,30 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Box,
-  Typography,
-  Chip,
-  useTheme,
-  alpha,
-} from "@mui/material";
+import { Box, Typography, Chip, useTheme, alpha } from "@mui/material";
 import RecordVoiceOverRoundedIcon from "@mui/icons-material/RecordVoiceOverRounded";
 import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import { ThemeModeToggle } from "@/components/theme-mode-toggle";
 import { AudioWavesCanvas } from "@/components/audio-waves-canvas";
-import { SearchBar } from "@/components/search-bar";
+import { SearchBar } from "@/features/search/components/search-bar";
+import { POPULAR_SEARCHES } from "@/features/search/constants";
 
-const POPULAR_SEARCHES = [
-  "English – USA",
-  "Conversational",
-  "Animation",
-  "Female adult",
-  "Podcast",
-  "E-learning",
-  "Commercial",
-];
+export interface SearchHeroProps {
+  /** Renders to the left of the search bar (e.g. filter button) */
+  slotLeftOfSearchBar?: React.ReactNode;
+}
 
-export function SearchHero() {
+export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
   const [query, setQuery] = useState("");
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -170,17 +160,30 @@ export function SearchHero() {
             fontSize: "1.0625rem",
           }}
         >
-          Search through thousands of voice actors and find exactly what you need
+          Search through thousands of voice actors and find exactly what you
+          need
         </Typography>
 
-        <Box sx={{ width: "100%" }}>
-          <SearchBar
-            value={query}
-            onChange={setQuery}
-            onClear={() => setQuery("")}
-            placeholder="Search for voice style, language, or keyword..."
-            onSubmit={handleSubmit}
-          />
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          {slotLeftOfSearchBar != null ? (
+            <Box sx={{ flexShrink: 0 }}>{slotLeftOfSearchBar}</Box>
+          ) : null}
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <SearchBar
+              value={query}
+              onChange={setQuery}
+              onClear={() => setQuery("")}
+              placeholder="Search for voice style, language, or keyword..."
+              onSubmit={handleSubmit}
+            />
+          </Box>
         </Box>
 
         <Typography
@@ -241,4 +244,4 @@ export function SearchHero() {
       </Box>
     </Box>
   );
-}
+};

@@ -35,3 +35,24 @@ export interface AttributeDefinition {
 }
 
 export type AttributesResponse = AttributeDefinition[];
+
+export interface AttributeValueSlim {
+  id: number;
+  name: string;
+}
+
+export interface AttributeSlim {
+  id: number;
+  name: string;
+  display_name: string;
+  values: AttributeValueSlim[];
+}
+
+export type AttributesSlimResponse = AttributeSlim[];
+
+export const ATTRIBUTE_NAMES_ALLOWED: readonly string[] = [
+  "languages",
+  "voice_age_genders",
+  "tones",
+  "voice_types",
+] as const;

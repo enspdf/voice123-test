@@ -129,6 +129,23 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 
 ---
 
+### Branch: `TSK-6-add-filters-to-the-search`
+
+| Date       | Task / activity                                                        | Hours |
+| ---------- | ---------------------------------------------------------------------- | ----- |
+| 2026-02-12 | Move components and files to follow feature folder structure           | 0.5   |
+| 2026-02-12 | Load and map attributes on search load and store globally              | 1     |
+| 2026-02-12 | Add filters UI to search page to allow user to filter searched results | 1.5   |
+
+### Task list (this branch)
+
+- Move components and files to follow feature folder structure.
+- Create view folder and have the complete UI encapsulated on a specific view assigned to the page.
+- Load mapped attributes server side to have better performance and load page faster, enable attributes access globally.
+- Add UI filters to the search UI based on the mapped attributes
+
+---
+
 ## Future improvements and recommendations
 
 - TODO

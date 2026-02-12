@@ -20,13 +20,13 @@ export interface SearchBarProps {
   onSubmit?: (e: React.FormEvent) => void;
 }
 
-export function SearchBar({
+export const SearchBar = ({
   value,
   onChange,
   onClear,
   placeholder = "Search for products, categories, or brands...",
   onSubmit,
-}: SearchBarProps) {
+}: SearchBarProps) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
   const primary = theme.palette.primary.main;
@@ -171,4 +171,4 @@ export function SearchBar({
       </Box>
     </Box>
   );
-}
+};
