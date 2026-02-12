@@ -18,9 +18,9 @@
 
 ### Prerequisites
 
-- [ ] Node.js (v18+ recommended) — _adjust for your stack_
-- [ ] npm / yarn / pnpm
-- [ ] Git
+- Node.js (v18+ recommended)
+- npm
+- Git
 
 ### Clone and install
 
@@ -57,13 +57,11 @@ npm run build
 
 ## Worklog
 
-_Update this section as you work. For detailed per-branch logs, you can add `docs/worklog-<branch>.md` and link it here._
-
 ### Branch: `TSK-1-add-read-me`
 
-| Date       | Task / activity              | Hours | Status | Notes             |
-| ---------- | ---------------------------- | ----- | ------ | ----------------- |
-| 2026-02-11 | Add README & initial worklog | 1     | Done   | Initial structure |
+| Date       | Task / activity              | Hours |
+| ---------- | ---------------------------- | ----- |
+| 2026-02-11 | Add README & initial worklog | 1     |
 
 ### Task list (this branch)
 
@@ -200,9 +198,19 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 - Update react query hooks to use nuqs and zustand to perform the search using those query params.
 - Create search states to keep and store the selected filters globally across the whole app.
 
-## Future improvements and recommendations
+---
 
-- TODO
+### Branch: `TSK-8-display-search-pagination`
+
+| Date       | Task / activity                                                                                                          | Hours |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------ | ----- |
+| 2026-02-12 | Update provider cards grid to add pagination component & set default page on each filter update to get correct responses | 0.5   |
+| 2026-02-12 | Update readme, remove .env.example from gitignore to have the example variables                                          | 0.0   |
+
+### Task list (this branch)
+
+- Update provider cards grid to add pagination component & set default page on each filter update to get correct responses
+- Update readme, remove .env.example from gitignore to have the example variables.
 
 ---
 
@@ -231,3 +239,4 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 - Suggested improvements to how the URL and search state are kept in sync, specifically when filters are updated in quick succession.
 - Aided in debugging and fixing edge cases where URL query params and zustand state could get out of sync after navigation or page reload.
 - Proposed enhancements to the user experience for filter persistence and state restoration on refresh.
+- Helped to reset to the default page (1) on filter updates.
