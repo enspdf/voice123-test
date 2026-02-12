@@ -1,6 +1,6 @@
 # voice123-test
 
-> **Branch:** `TSK-1-add-read-me` — *Update this line when working on a different branch. For per-branch worklogs, see [Worklog](#worklog) and [Per-branch docs](#per-branch-documentation).*
+> **Branch:** `TSK-1-add-read-me` — _Update this line when working on a different branch. For per-branch worklogs, see [Worklog](#worklog) and [Per-branch docs](#per-branch-documentation)._
 
 ---
 
@@ -18,7 +18,7 @@
 
 ### Prerequisites
 
-- [ ] Node.js (v18+ recommended) — *adjust for your stack*
+- [ ] Node.js (v18+ recommended) — _adjust for your stack_
 - [ ] npm / yarn / pnpm
 - [ ] Git
 
@@ -52,17 +52,18 @@ npm test
 ```bash
 npm run build
 ```
+
 ---
 
 ## Worklog
 
-*Update this section as you work. For detailed per-branch logs, you can add `docs/worklog-<branch>.md` and link it here.*
+_Update this section as you work. For detailed per-branch logs, you can add `docs/worklog-<branch>.md` and link it here._
 
 ### Branch: `TSK-1-add-read-me`
 
-| Date       | Task / activity                                                                 | Hours | Status   | Notes             |
-|------------|----------------------------------------------------------------------------------|-------|----------|-------------------|
-| 2026-02-11 | Add README & initial worklog                                                     | 1     | Done     | Initial structure |
+| Date       | Task / activity              | Hours | Status | Notes             |
+| ---------- | ---------------------------- | ----- | ------ | ----------------- |
+| 2026-02-11 | Add README & initial worklog | 1     | Done   | Initial structure |
 
 ### Task list (this branch)
 
@@ -74,9 +75,9 @@ npm run build
 
 ### Branch: `TSK-2-setup-next-js-application`
 
-| Date       | Task / activity                                                                 | Hours | Status   | Notes             |
-|------------|----------------------------------------------------------------------------------|-------|----------|-------------------|
-| 2026-02-11 | Setup NextJS application & required libraries                                             | 0.5     | Done     | Initial structure |
+| Date       | Task / activity                               | Hours |
+| ---------- | --------------------------------------------- | ----- |
+| 2026-02-11 | Setup NextJS application & required libraries | 0.5   |
 
 ### Task list (this branch)
 
@@ -87,15 +88,29 @@ npm run build
 
 ### Branch: `TSK-3-setup-providers-and-page-layout`
 
-| Date       | Task / activity                                                                 | Hours | Status   | Notes             |
-|------------|----------------------------------------------------------------------------------|-------|----------|-------------------|
-| 2026-02-11 | Integrate custom MUI theme color dark/light and structure the providers                                             | 0.5     | Done     | Initial structure |
+| Date       | Task / activity                                                         | Hours |
+| ---------- | ----------------------------------------------------------------------- | ----- |
+| 2026-02-11 | Integrate custom MUI theme color dark/light and structure the providers | 0.5   |
 
 ### Task list (this branch)
 
 - Setup @mui/icons-material
 - Add custom theme to have dark/light Voice123 brand colors
 - Simplify providers implementation/usage
+
+---
+
+### Branch: `TSK-4-layout-update-and-search-bar`
+
+| Date       | Task / activity                                                                       | Hours |
+| ---------- | ------------------------------------------------------------------------------------- | ----- |
+| 2026-02-11 | Update layout and theme colors, setup tests configuration and implement search bar UI | 0.5   |
+
+### Task list (this branch)
+
+- Setup jest as testing tool & tests utilities
+- Update theme colors dark/light
+- Added search bar component with its base rendering tests
 
 ---
 
@@ -116,3 +131,5 @@ npm run build
 - Drafted and structured this README.
 - Proposed worklog format (task list, hours, status) and per-branch documentation approach.
 - Design & update the theme provider for dark/light color based ont Voice123 colors.
+- Create audio wave canvas as background component to have better background color/animation instead of a plain color.
+- Generate dark/light mode colors and update base MUI theme.

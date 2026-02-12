@@ -2,66 +2,94 @@
 
 import { createTheme, type PaletteMode } from "@mui/material/styles";
 
-/**
- * Voice123 .md-theme-light palette mapped to MUI.
- * Source: --md-primary-* (gray), --md-accent-* (blue), --md-warn-* (orange), --md-background-*.
- */
-const voice123Light = {
-  // md-accent → MUI primary (blue: links, primary actions)
+const lightPalette = {
   primary: {
-    main: "#2196f3",   // md-accent-color-500
-    light: "#90caf9",  // md-accent-color-200
-    dark: "#1565c0",   // md-accent-color-800
-    contrastText: "rgba(255, 255, 255, 0.87)", // md-accent-contrast
+    main: "#6366f1",
+    light: "#818cf8",
+    dark: "#4f46e5",
+    contrastText: "rgba(255, 255, 255, 0.87)",
   },
-  // md-primary (gray) → MUI secondary
   secondary: {
-    main: "#9e9e9e",   // md-primary-color-500
-    light: "#eeeeee",  // md-primary-color-200
-    dark: "#424242",   // md-primary-color-800
-    contrastText: "rgba(0, 0, 0, 0.9)", // md-primary-contrast
-  },
-  // md-warn → MUI warning (orange CTAs)
-  warning: {
-    main: "#ff5722",   // md-warn-color-500
-    light: "#ffab91",  // md-warn-color-200
-    dark: "#d84315",   // md-warn-color-800
-    contrastText: "rgba(255, 255, 255, 0.87)", // md-warn-contrast
+    main: "#ec4899",
+    light: "#f472b6",
+    dark: "#db2777",
+    contrastText: "#ffffff",
   },
   background: {
-    default: "#ffffff", // md-background-color
+    default: "#f8fafc",
     paper: "#ffffff",
   },
+  success: {
+    main: "#10b981",
+    light: "#34d399",
+    dark: "#059669",
+    contrastText: "#ffffff",
+  },
+  warning: {
+    main: "#f59e0b",
+    light: "#fbbf24",
+    dark: "#d97706",
+    contrastText: "rgba(0, 0, 0, 0.87)",
+  },
+  error: {
+    main: "#ef4444",
+    light: "#f87171",
+    dark: "#dc2626",
+    contrastText: "#ffffff",
+  },
+  info: {
+    main: "#6366f1",
+    light: "#818cf8",
+    dark: "#4f46e5",
+    contrastText: "rgba(255, 255, 255, 0.87)",
+  },
   text: {
-    primary: "rgba(0, 0, 0, 0.9)",   // md-background-contrast
+    primary: "rgba(0, 0, 0, 0.87)",
     secondary: "rgba(0, 0, 0, 0.6)",
     disabled: "rgba(0, 0, 0, 0.38)",
   },
 } as const;
 
-/** Dark mode: same hues, dark surfaces and light text. */
-const voice123Dark = {
+const darkPalette = {
   primary: {
-    main: "#42a5f5",   // accent 400 (readable on dark)
-    light: "#90caf9",
-    dark: "#1e88e5",
-    contrastText: "rgba(255, 255, 255, 0.87)",
+    main: "#818cf8",
+    light: "#a5b4fc",
+    dark: "#6366f1",
+    contrastText: "rgba(0, 0, 0, 0.87)",
   },
   secondary: {
-    main: "#bdbdbd",   // primary 400
-    light: "#eeeeee",
-    dark: "#757575",
-    contrastText: "rgba(0, 0, 0, 0.9)",
-  },
-  warning: {
-    main: "#ff7043",   // warn 400
-    light: "#ffab91",
-    dark: "#f4511e",
-    contrastText: "rgba(255, 255, 255, 0.87)",
+    main: "#f472b6",
+    light: "#f9a8d4",
+    dark: "#ec4899",
+    contrastText: "rgba(0, 0, 0, 0.87)",
   },
   background: {
-    default: "#121212",
-    paper: "#1e1e1e",
+    default: "#0f172a",
+    paper: "#1e293b",
+  },
+  success: {
+    main: "#34d399",
+    light: "#6ee7b7",
+    dark: "#10b981",
+    contrastText: "rgba(0, 0, 0, 0.87)",
+  },
+  warning: {
+    main: "#fbbf24",
+    light: "#fcd34d",
+    dark: "#f59e0b",
+    contrastText: "rgba(0, 0, 0, 0.87)",
+  },
+  error: {
+    main: "#f87171",
+    light: "#fca5a5",
+    dark: "#ef4444",
+    contrastText: "rgba(0, 0, 0, 0.87)",
+  },
+  info: {
+    main: "#818cf8",
+    light: "#a5b4fc",
+    dark: "#6366f1",
+    contrastText: "rgba(0, 0, 0, 0.87)",
   },
   text: {
     primary: "#ffffff",
@@ -71,7 +99,7 @@ const voice123Dark = {
 } as const;
 
 export function getDesignTokens(mode: PaletteMode) {
-  const palette = mode === "dark" ? voice123Dark : voice123Light;
+  const palette = mode === "dark" ? darkPalette : lightPalette;
 
   return createTheme({
     palette: {
@@ -79,10 +107,11 @@ export function getDesignTokens(mode: PaletteMode) {
       ...palette,
     },
     typography: {
-      fontFamily: "var(--font-roboto), Roboto, sans-serif",
+      fontFamily:
+        'var(--font-inter), "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     },
     shape: {
-      borderRadius: 8,
+      borderRadius: 16,
     },
   });
 }
