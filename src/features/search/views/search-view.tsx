@@ -2,7 +2,9 @@
 
 import { useState, useCallback, useMemo } from "react";
 import type { AttributesSlimResponse } from "@/features/attributes/api/types";
+import type { NormalizedSearchResult } from "@/features/search/api/types";
 import { AttributesStoreHydrator } from "@/features/attributes/components/attributes-store-hydrator";
+import { SearchStoreHydrator } from "@/features/search/components/search-store-hydrator";
 import { SearchHero } from "@/features/search/components/search-hero";
 import {
   DEFAULT_SEARCH_FILTERS,
@@ -10,10 +12,12 @@ import {
 } from "@/features/search/components/filter-sidebar";
 import { FilterDrawer } from "@/features/search/components/filter-drawer";
 import { FilterButton } from "@/features/search/components/filter-button";
-import { Box } from "@mui/material";
+import { ProviderCardGrid } from "@/features/search/components/provider-card-grid";
+import { alpha, Box, useTheme } from "@mui/material";
 
 type SearchViewProps = {
   attributes?: AttributesSlimResponse;
+  providers?: NormalizedSearchResult | null;
 };
 
 const getActiveFiltersCount = (filters: SearchFilterState): number => {
@@ -23,11 +27,17 @@ const getActiveFiltersCount = (filters: SearchFilterState): number => {
   );
 };
 
-const SearchView = ({ attributes = [] }: SearchViewProps) => {
+const SearchView = ({ attributes = [], providers = null }: SearchViewProps) => {
   const [filters, setFilters] = useState<SearchFilterState>(
     DEFAULT_SEARCH_FILTERS,
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+  const primary = theme.palette.primary.main;
+  const primaryLight = theme.palette.primary.light;
+  const bgDefault = theme.palette.background.default;
+  const paper = theme.palette.background.paper;
 
   const handleReset = useCallback(() => {
     setFilters(DEFAULT_SEARCH_FILTERS);
@@ -45,7 +55,7 @@ const SearchView = ({ attributes = [] }: SearchViewProps) => {
 
   return (
     <AttributesStoreHydrator attributes={attributes}>
-      <Box>
+      <SearchStoreHydrator providers={providers}>
         <FilterDrawer
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
@@ -53,8 +63,22 @@ const SearchView = ({ attributes = [] }: SearchViewProps) => {
           onFilterChange={setFilters}
           onReset={handleReset}
         />
-        <SearchHero slotLeftOfSearchBar={filterButton} />
-      </Box>
+        <Box
+          sx={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "stretch",
+            overflow: "hidden",
+            background: isDark
+              ? `linear-gradient(90deg, ${alpha(primaryLight, 0.18)} 0%, ${alpha(primary, 0.22)} 40%, ${alpha(primary, 0.12)} 100%), ${bgDefault}`
+              : `linear-gradient(90deg, ${alpha(primaryLight, 0.35)} 0%, ${alpha(primary, 0.2)} 50%, ${alpha(primary, 0.08)} 100%), ${bgDefault}`,
+          }}
+        >
+          <SearchHero slotLeftOfSearchBar={filterButton} />
+          <ProviderCardGrid />
+        </Box>
+      </SearchStoreHydrator>
     </AttributesStoreHydrator>
   );
 };

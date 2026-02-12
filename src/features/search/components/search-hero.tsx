@@ -10,7 +10,6 @@ import { SearchBar } from "@/features/search/components/search-bar";
 import { POPULAR_SEARCHES } from "@/features/search/constants";
 
 export interface SearchHeroProps {
-  /** Renders to the left of the search bar (e.g. filter button) */
   slotLeftOfSearchBar?: React.ReactNode;
 }
 
@@ -23,25 +22,19 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
   const bgDefault = theme.palette.background.default;
   const paper = theme.palette.background.paper;
 
-  function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Search:", query);
-  }
+  };
 
   return (
     <Box
       component="main"
       sx={{
         position: "relative",
-        minHeight: "100vh",
-        height: "100dvh",
         display: "flex",
         flexDirection: "column",
         alignItems: "stretch",
         overflow: "hidden",
-        background: isDark
-          ? `linear-gradient(90deg, ${alpha(primaryLight, 0.18)} 0%, ${alpha(primary, 0.22)} 40%, ${alpha(primary, 0.12)} 100%), ${bgDefault}`
-          : `linear-gradient(90deg, ${alpha(primaryLight, 0.35)} 0%, ${alpha(primary, 0.2)} 50%, ${alpha(primary, 0.08)} 100%), ${bgDefault}`,
       }}
     >
       <Box sx={{ position: "absolute", inset: 0, zIndex: 0 }}>
@@ -144,53 +137,16 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
           letterSpacing="-0.03em"
           sx={{
             fontSize: { xs: "2rem", sm: "2.5rem", md: "2.75rem" },
-            mb: 1.5,
           }}
         >
           Discover amazing voices
         </Typography>
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          textAlign="center"
-          sx={{
-            maxWidth: 440,
-            mb: 4,
-            lineHeight: 1.6,
-            fontSize: "1.0625rem",
-          }}
-        >
-          Search through thousands of voice actors and find exactly what you
-          need
-        </Typography>
-
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
-          {slotLeftOfSearchBar != null ? (
-            <Box sx={{ flexShrink: 0 }}>{slotLeftOfSearchBar}</Box>
-          ) : null}
-          <Box sx={{ flex: 1, minWidth: 0 }}>
-            <SearchBar
-              value={query}
-              onChange={setQuery}
-              onClear={() => setQuery("")}
-              placeholder="Search for voice style, language, or keyword..."
-              onSubmit={handleSubmit}
-            />
-          </Box>
-        </Box>
 
         <Typography
           variant="caption"
           color="text.secondary"
           sx={{
-            mt: 3,
+            mt: 1.5,
             mb: 1.5,
             textTransform: "uppercase",
             letterSpacing: "0.08em",
@@ -205,6 +161,7 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
             flexWrap: "wrap",
             justifyContent: "center",
             gap: 1.25,
+            mb: 3,
           }}
         >
           {POPULAR_SEARCHES.map((label) => (
@@ -229,18 +186,27 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
           ))}
         </Box>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
+        <Box
           sx={{
-            mt: 4,
-            textAlign: "center",
-            maxWidth: 360,
-            opacity: 0.9,
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
           }}
         >
-          Professional voice actors · Any language · Ready for your project
-        </Typography>
+          {slotLeftOfSearchBar != null ? (
+            <Box sx={{ flexShrink: 0 }}>{slotLeftOfSearchBar}</Box>
+          ) : null}
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <SearchBar
+              value={query}
+              onChange={setQuery}
+              onClear={() => setQuery("")}
+              placeholder="Search for voice style, language, or keyword..."
+              onSubmit={handleSubmit}
+            />
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
