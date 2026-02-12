@@ -56,20 +56,32 @@ npm run build
 
 ## Worklog
 
+*Update this section as you work. For detailed per-branch logs, you can add `docs/worklog-<branch>.md` and link it here.*
+
 ### Branch: `TSK-1-add-read-me`
 
-| Date       | Task / activity                    | Hours | Status   | Notes                    |
-|------------|------------------------------------|-------|----------|--------------------------|
-| 2026-02-11 | Add README & initial worklog  | 1   | Done     | Initial structure        |
-|            |                                    |       |          |                          |
-
-**Total hours (this branch):** 1
+| Date       | Task / activity                                                                 | Hours | Status   | Notes             |
+|------------|----------------------------------------------------------------------------------|-------|----------|-------------------|
+| 2026-02-11 | Add README & initial worklog                                                     | 1     | Done     | Initial structure |
 
 ### Task list (this branch)
 
 - Read test instructions.
 - Play with API endpoint and use platform to check backend endpoints used in the UI that can be used and integrated in the final test.
 - Add README with setup guide and initial worklog details.
+
+---
+
+### Branch: `TSK-2-setup-next-js-application`
+
+| Date       | Task / activity                                                                 | Hours | Status   | Notes             |
+|------------|----------------------------------------------------------------------------------|-------|----------|-------------------|
+| 2026-02-11 | Setup NextJS application & required libraries                                             | 0.5     | Done     | Initial structure |
+
+### Task list (this branch)
+
+- Setup @mui/material, @emotion/react, @emotion/styled and @tanstack/react-query, nuqs packages
+- Add base MUI page to test theme load and mui components rendering
 
 ---
 
@@ -84,9 +96,8 @@ npm run build
 ### Tools and context
 
 - **Tool(s):** Cursor IDE.
-- **Use cases:**
-[x] Scaffold README with base structure and branch worklog
 
 ### What AI did
-- Drafted and structured this README
+
+- Drafted and structured this README.
 - Proposed worklog format (task list, hours, status) and per-branch documentation approach.
