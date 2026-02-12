@@ -98,7 +98,7 @@ const darkPalette = {
   },
 } as const;
 
-export function getDesignTokens(mode: PaletteMode) {
+export const getDesignTokens = (mode: PaletteMode) => {
   const palette = mode === "dark" ? darkPalette : lightPalette;
 
   return createTheme({

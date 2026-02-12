@@ -54,9 +54,24 @@ const buildPaginationMeta = (
   return { page, perPage, total, totalPages };
 };
 
+export interface SearchProvidersFilters {
+  languages?: string;
+  voice_age_genders?: string;
+  voice_types?: string;
+  tones?: string;
+}
+
 export interface SearchProvidersOptions {
   aggregations?: boolean;
+  filters?: SearchProvidersFilters;
 }
+
+const FILTER_PARAM_KEYS: (keyof SearchProvidersFilters)[] = [
+  "languages",
+  "voice_age_genders",
+  "voice_types",
+  "tones",
+];
 
 export const searchProviders = async (
   keywords: string,
@@ -75,6 +90,16 @@ export const searchProviders = async (
 
   if (options?.aggregations) {
     params.set("aggregations", "true");
+  }
+
+  const filters = options?.filters;
+  if (filters) {
+    for (const key of FILTER_PARAM_KEYS) {
+      const value = filters[key];
+      if (value != null && String(value).trim().length > 0) {
+        params.set(key, String(value).trim());
+      }
+    }
   }
 
   const url = `${VOICE123_SEARCH_URL}?${params.toString()}`;

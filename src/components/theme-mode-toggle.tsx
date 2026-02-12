@@ -6,7 +6,7 @@ import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import { useContext } from "react";
 import { ThemeModeContext } from "@/app/providers/theme-provider";
 
-export function ThemeModeToggle() {
+export const ThemeModeToggle = () => {
   const theme = useTheme();
   const { toggleMode } = useContext(ThemeModeContext);
   const isDark = theme.palette.mode === "dark";
@@ -17,11 +17,7 @@ export function ThemeModeToggle() {
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       color="primary"
     >
-      {isDark ? (
-        <LightModeRoundedIcon />
-      ) : (
-        <DarkModeRoundedIcon />
-      )}
+      {isDark ? <LightModeRoundedIcon /> : <DarkModeRoundedIcon />}
     </IconButton>
   );
-}
+};

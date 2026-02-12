@@ -12,7 +12,7 @@ interface WaveConfig {
   phase: number;
 }
 
-export function AudioWavesCanvas() {
+export const AudioWavesCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -26,15 +26,19 @@ export function AudioWavesCanvas() {
     let animationId: number;
     let time = 0;
 
-    const primary = isDark ? theme.palette.primary.light : theme.palette.primary.main;
-    const warning = isDark ? theme.palette.warning.light : theme.palette.warning.main;
+    const primary = isDark
+      ? theme.palette.primary.light
+      : theme.palette.primary.main;
+    const warning = isDark
+      ? theme.palette.warning.light
+      : theme.palette.warning.main;
 
-    function hexToRgba(hex: string, a: number) {
+    const hexToRgba = (hex: string, a: number) => {
       const r = Number.parseInt(hex.slice(1, 3), 16);
       const g = Number.parseInt(hex.slice(3, 5), 16);
       const b = Number.parseInt(hex.slice(5, 7), 16);
       return `rgba(${r},${g},${b},${a})`;
-    }
+    };
 
     const op = (d: number, l: number) => (isDark ? d : l);
 
@@ -89,16 +93,16 @@ export function AudioWavesCanvas() {
       },
     ];
 
-    function resize() {
+    const resize = () => {
       if (!canvas) return;
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
+    };
 
-    function drawWave(w: WaveConfig, t: number) {
+    const drawWave = (w: WaveConfig, t: number) => {
       if (!ctx || !canvas) return;
       const width = canvas.getBoundingClientRect().width;
       const height = canvas.getBoundingClientRect().height;
@@ -124,9 +128,9 @@ export function AudioWavesCanvas() {
         }
       }
       ctx.stroke();
-    }
+    };
 
-    function animate() {
+    const animate = () => {
       if (!ctx || !canvas) return;
       const width = canvas.getBoundingClientRect().width;
       const height = canvas.getBoundingClientRect().height;
@@ -139,7 +143,7 @@ export function AudioWavesCanvas() {
 
       time += 1;
       animationId = requestAnimationFrame(animate);
-    }
+    };
 
     resize();
     animate();
@@ -147,7 +151,7 @@ export function AudioWavesCanvas() {
     window.addEventListener("resize", resize);
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    function handleMotionPref() {
+    const handleMotionPref = () => {
       if (mq.matches) {
         cancelAnimationFrame(animationId);
         if (ctx && canvas) {
@@ -161,7 +165,7 @@ export function AudioWavesCanvas() {
       } else {
         animate();
       }
-    }
+    };
     mq.addEventListener("change", handleMotionPref);
     if (mq.matches) handleMotionPref();
 
@@ -189,4 +193,4 @@ export function AudioWavesCanvas() {
       }}
     />
   );
-}
+};

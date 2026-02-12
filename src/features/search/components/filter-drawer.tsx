@@ -4,53 +4,70 @@ import {
   Drawer,
   Box,
   Typography,
-  FormControl,
   Divider,
   Chip,
   Button,
-  Select,
-  MenuItem,
   Autocomplete,
   TextField,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { useShallow } from "zustand/react/shallow";
 import { useAttributesStore } from "@/features/attributes/store/attributes-store";
 import type { AttributeValueSlim } from "@/features/attributes/api/types";
-import type { SearchFilterState } from "@/features/search/components/filter-sidebar";
+import {
+  useFiltersStore,
+  FILTER_KEYS,
+  getActiveFiltersCount,
+  type FilterKey,
+  type FiltersStateFilterKeys,
+} from "@/features/search/store/filters-store";
+import { useSearchStore } from "@/features/search/store/search-store";
 
 const DRAWER_WIDTH = 360;
+
+const filtersStateSelector = (s: {
+  languages: string;
+  voice_age_genders: string;
+  voice_types: string;
+  tones: string;
+}) => ({
+  languages: s.languages,
+  voice_age_genders: s.voice_age_genders,
+  voice_types: s.voice_types,
+  tones: s.tones,
+});
 
 interface FilterDrawerProps {
   open: boolean;
   onClose: () => void;
-  filters: SearchFilterState;
-  onFilterChange: (filters: SearchFilterState) => void;
-  onReset: () => void;
 }
 
-function getActiveFiltersCount(filters: SearchFilterState): number {
-  return Object.values(filters).reduce((sum, ids) => sum + ids.length, 0);
-}
-
-export function FilterDrawer({
-  open,
-  onClose,
-  filters,
-  onFilterChange,
-  onReset,
-}: FilterDrawerProps) {
+export const FilterDrawer = ({ open, onClose }: FilterDrawerProps) => {
   const attributes = useAttributesStore((s) => s.attributes);
+  const filtersState = useFiltersStore(useShallow(filtersStateSelector));
+  const setFilterIds = useFiltersStore((s) => s.setFilterIds);
+  const getFilterIds = useFiltersStore((s) => s.getFilterIds);
+  const resetFilters = useFiltersStore((s) => s.resetFilters);
+  const isFetching = useSearchStore((s) => s.isFetching);
 
   const handleAttributeChange = (
-    attributeName: string,
+    attributeName: FilterKey,
     selectedValues: AttributeValueSlim[],
   ) => {
-    const valueIds = selectedValues.map((v) => v.id);
-    onFilterChange({ ...filters, [attributeName]: valueIds });
+    setFilterIds(
+      attributeName,
+      selectedValues.map((v) => v.id),
+    );
   };
 
-  const activeCount = getActiveFiltersCount(filters);
+  const activeCount = getActiveFiltersCount(
+    filtersState as FiltersStateFilterKeys,
+  );
+
+  const attributesToShow = attributes.filter((attr) =>
+    FILTER_KEYS.includes(attr.name as FilterKey),
+  );
 
   const sectionLabelSx = {
     mb: 1.5,
@@ -131,7 +148,8 @@ export function FilterDrawer({
           </Box>
           <Button
             size="small"
-            onClick={onReset}
+            onClick={resetFilters}
+            disabled={isFetching}
             startIcon={<RestartAltIcon />}
             sx={{
               textTransform: "none",
@@ -149,13 +167,13 @@ export function FilterDrawer({
             p: 2,
           }}
         >
-          {attributes.length === 0 ? (
+          {attributesToShow.length === 0 ? (
             <Typography variant="body2" color="text.secondary">
               No filters available yet.
             </Typography>
           ) : (
-            attributes.map((attr, index) => {
-              const selectedIds = filters[attr.name] ?? [];
+            attributesToShow.map((attr, index) => {
+              const selectedIds = getFilterIds(attr.name as FilterKey);
               const selectedValues = attr.values.filter((v) =>
                 selectedIds.includes(v.id),
               );
@@ -168,10 +186,11 @@ export function FilterDrawer({
                   <Autocomplete
                     multiple
                     size="small"
+                    disabled={isFetching}
                     options={attr.values}
                     value={selectedValues}
                     onChange={(__, nextValue) => {
-                      handleAttributeChange(attr.name, nextValue);
+                      handleAttributeChange(attr.name as FilterKey, nextValue);
                     }}
                     getOptionLabel={(option) => option.name}
                     isOptionEqualToValue={(a, b) => a.id === b.id}
@@ -207,7 +226,7 @@ export function FilterDrawer({
                       ))
                     }
                   />
-                  {index < attributes.length - 1 && (
+                  {index < attributesToShow.length - 1 && (
                     <Divider sx={{ mt: 3, borderColor: "divider" }} />
                   )}
                 </Box>
@@ -218,4 +237,4 @@ export function FilterDrawer({
       </Box>
     </Drawer>
   );
-}
+};

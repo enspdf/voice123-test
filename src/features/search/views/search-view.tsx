@@ -1,18 +1,22 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState } from "react";
+import { useShallow } from "zustand/react/shallow";
 import type { AttributesSlimResponse } from "@/features/attributes/api/types";
 import type { NormalizedSearchResult } from "@/features/search/api/types";
 import { AttributesStoreHydrator } from "@/features/attributes/components/attributes-store-hydrator";
 import { SearchStoreHydrator } from "@/features/search/components/search-store-hydrator";
 import { SearchHero } from "@/features/search/components/search-hero";
-import {
-  DEFAULT_SEARCH_FILTERS,
-  type SearchFilterState,
-} from "@/features/search/components/filter-sidebar";
 import { FilterDrawer } from "@/features/search/components/filter-drawer";
 import { FilterButton } from "@/features/search/components/filter-button";
+import { FiltersUrlSync } from "@/features/search/components/filters-url-sync";
+import { SearchQuerySync } from "@/features/search/components/search-query-sync";
 import { ProviderCardGrid } from "@/features/search/components/provider-card-grid";
+import {
+  useFiltersStore,
+  getActiveFiltersCount,
+  type FiltersStateFilterKeys,
+} from "@/features/search/store/filters-store";
 import { alpha, Box, useTheme } from "@mui/material";
 
 type SearchViewProps = {
@@ -20,30 +24,30 @@ type SearchViewProps = {
   providers?: NormalizedSearchResult | null;
 };
 
-const getActiveFiltersCount = (filters: SearchFilterState): number => {
-  return Object.values(filters).reduce(
-    (activeFiltersCount, filters) => activeFiltersCount + filters.length,
-    0,
-  );
-};
+const filtersStateSelector = (s: {
+  languages: string;
+  voice_age_genders: string;
+  voice_types: string;
+  tones: string;
+}) => ({
+  languages: s.languages,
+  voice_age_genders: s.voice_age_genders,
+  voice_types: s.voice_types,
+  tones: s.tones,
+});
 
 const SearchView = ({ attributes = [], providers = null }: SearchViewProps) => {
-  const [filters, setFilters] = useState<SearchFilterState>(
-    DEFAULT_SEARCH_FILTERS,
-  );
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const filtersState = useFiltersStore(useShallow(filtersStateSelector));
+  const activeCount = getActiveFiltersCount(
+    filtersState as FiltersStateFilterKeys,
+  );
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
   const primary = theme.palette.primary.main;
   const primaryLight = theme.palette.primary.light;
   const bgDefault = theme.palette.background.default;
   const paper = theme.palette.background.paper;
-
-  const handleReset = useCallback(() => {
-    setFilters(DEFAULT_SEARCH_FILTERS);
-  }, []);
-
-  const activeCount = useMemo(() => getActiveFiltersCount(filters), [filters]);
 
   const filterButton = (
     <FilterButton
@@ -56,12 +60,11 @@ const SearchView = ({ attributes = [], providers = null }: SearchViewProps) => {
   return (
     <AttributesStoreHydrator attributes={attributes}>
       <SearchStoreHydrator providers={providers}>
+        <FiltersUrlSync />
+        <SearchQuerySync />
         <FilterDrawer
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
-          filters={filters}
-          onFilterChange={setFilters}
-          onReset={handleReset}
         />
         <Box
           sx={{

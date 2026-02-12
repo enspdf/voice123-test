@@ -21,6 +21,6 @@ export const useSearchProviders = (
   return useQuery<NormalizedSearchResult>({
     queryKey: searchProvidersQueryKey(keywords, page, apiOptions),
     queryFn: () => searchProviders(keywords, page, apiOptions),
-    enabled: enabled && keywords.trim().length > 0,
+    enabled: enabled !== false,
   });
 };

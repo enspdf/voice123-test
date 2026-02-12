@@ -10,16 +10,21 @@ interface FilterButtonProps {
   variant?: "icon" | "button";
 }
 
-export function FilterButton({
+export const FilterButton = ({
   onClick,
   activeCount = 0,
   variant = "button",
-}: FilterButtonProps) {
+}: FilterButtonProps) => {
   const theme = useTheme();
   const primary = theme.palette.primary.main;
 
   const icon = (
-    <Badge badgeContent={activeCount} color="secondary" max={99} showZero={false}>
+    <Badge
+      badgeContent={activeCount}
+      color="secondary"
+      max={99}
+      showZero={false}
+    >
       <FilterListIcon />
     </Badge>
   );
@@ -63,4 +68,4 @@ export function FilterButton({
       Filters
     </Button>
   );
-}
+};

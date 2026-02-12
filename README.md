@@ -182,6 +182,24 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 
 ---
 
+### Branch: `TSK-7-apply-search-and-filters`
+
+| Date       | Task / activity                                                                                 | Hours |
+| ---------- | ----------------------------------------------------------------------------------------------- | ----- |
+| 2026-02-12 | Create search states to keep and store the selected filters globally across the whole app       | 1     |
+| 2026-02-12 | Use nuqs to persist zustand filters with the url and keep both synchronized                     | 1     |
+| 2026-02-12 | Update search bar to update keyword filter on enter or click on the button                      | 0.2   |
+| 2026-02-12 | Update react query hooks to use nuqs and zustand to perform the search using those query params | 1     |
+| 2026-02-12 | Create search states to keep and store the selected filters globally across the whole app.      | 2     |
+
+### Task list (this branch)
+
+- Create search states to keep and store the selected filters globally across the whole app.
+- Use nuqs to persist zustand filters with the url and keep both synchronized.
+- Update search bar to update keyword filter on enter or click on the button.
+- Update react query hooks to use nuqs and zustand to perform the search using those query params.
+- Create search states to keep and store the selected filters globally across the whole app.
+
 ## Future improvements and recommendations
 
 - TODO
@@ -208,3 +226,8 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 - Generate commit messages.
 - Build audio player
 - Fix and create some unit tests
+- Assisted in fixing zustand search filters to keep params and state synchronized after updates and reloads when query parameters exist.
+- Helped refactor and document search and filter logic for better maintainability.
+- Suggested improvements to how the URL and search state are kept in sync, specifically when filters are updated in quick succession.
+- Aided in debugging and fixing edge cases where URL query params and zustand state could get out of sync after navigation or page reload.
+- Proposed enhancements to the user experience for filter persistence and state restoration on refresh.

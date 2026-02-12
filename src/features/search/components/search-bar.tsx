@@ -18,6 +18,7 @@ export interface SearchBarProps {
   onClear: () => void;
   placeholder?: string;
   onSubmit?: (e: React.FormEvent) => void;
+  disabled?: boolean;
 }
 
 export const SearchBar = ({
@@ -26,6 +27,7 @@ export const SearchBar = ({
   onClear,
   placeholder = "Search for products, categories, or brands...",
   onSubmit,
+  disabled = false,
 }: SearchBarProps) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -86,6 +88,7 @@ export const SearchBar = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           variant="outlined"
+          disabled={disabled}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -113,6 +116,7 @@ export const SearchBar = ({
                     onClick={onClear}
                     edge="end"
                     size="small"
+                    disabled={disabled}
                     sx={{
                       mr: 1,
                       background: alpha(primary, 0.1),
@@ -130,6 +134,7 @@ export const SearchBar = ({
                   variant="contained"
                   size="medium"
                   disableElevation
+                  disabled={disabled}
                   startIcon={<SearchIcon sx={{ fontSize: 20 }} />}
                   sx={{
                     mr: 1.5,
