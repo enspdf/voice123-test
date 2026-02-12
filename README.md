@@ -1,9 +1,3 @@
-# voice123-test
-
-> **Branch:** `TSK-1-add-read-me` — _Update this line when working on a different branch. For per-branch worklogs, see [Worklog](#worklog) and [Per-branch docs](#per-branch-documentation)._
-
----
-
 ## Table of contents
 
 - [Application setup guide](#application-setup-guide)
