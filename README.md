@@ -146,6 +146,25 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 
 ---
 
+### Branch: `TSK-6-add-filters-to-the-search`
+
+| Date       | Task / activity                                                           | Hours |
+| ---------- | ------------------------------------------------------------------------- | ----- |
+| 2026-02-12 | Adds zustand to global state management & store all attributes            | 0.5   |
+| 2026-02-12 | Created attributes store and setup dev tools to see zustand store content | 0.1   |
+| 2026-02-12 | Map and filter specific attributes to build options used to filter        | 0.5   |
+| 2026-02-12 | Create and setup the folder structure to properly set the search view     | 0.5   |
+| 2026-02-12 | Create filter button, and filters drawer to display the attribute options | 1     |
+
+### Task list (this branch)
+
+- Move components and files to follow feature folder structure.
+- Create view folder and have the complete UI encapsulated on a specific view assigned to the page.
+- Load mapped attributes server side to have better performance and load page faster, enable attributes access globally.
+- Add UI filters to the search UI based on the mapped attributes
+
+---
+
 ## Future improvements and recommendations
 
 - TODO
@@ -167,3 +186,6 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 - Generate dark/light mode colors and update base MUI theme.
 - Generate attributes and search types based on API response.
 - Setup the base to test the react-query hooks.
+- Process and create the base mapper to filter the attributes I've selected to be used as filters.
+- Defined and proposed the initial version of the filters drawer and items position.
+- Generate commit messages.

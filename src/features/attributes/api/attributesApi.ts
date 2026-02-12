@@ -10,7 +10,9 @@ export const getAttributes = async (): Promise<AttributesSlimResponse> => {
       `Voice123 attributes failed: ${attributesResponse.status} ${attributesResponse.statusText}`,
     );
   }
-  const mappedAttributes = mapAttributesToSlim(await attributesResponse.json());
+
+  const attributes = await attributesResponse.json();
+  const mappedAttributes = mapAttributesToSlim(attributes);
 
   return mappedAttributes;
 };
