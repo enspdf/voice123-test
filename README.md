@@ -85,6 +85,20 @@ npm run build
 
 ---
 
+### Branch: `TSK-3-setup-providers-and-page-layout`
+
+| Date       | Task / activity                                                                 | Hours | Status   | Notes             |
+|------------|----------------------------------------------------------------------------------|-------|----------|-------------------|
+| 2026-02-11 | Integrate custom MUI theme color dark/light and structure the providers                                             | 0.5     | Done     | Initial structure |
+
+### Task list (this branch)
+
+- Setup @mui/icons-material
+- Add custom theme to have dark/light Voice123 brand colors
+- Simplify providers implementation/usage
+
+---
+
 ## Future improvements and recommendations
 
 - TODO
@@ -101,3 +115,4 @@ npm run build
 
 - Drafted and structured this README.
 - Proposed worklog format (task list, hours, status) and per-branch documentation approach.
+- Design & update the theme provider for dark/light color based ont Voice123 colors.
