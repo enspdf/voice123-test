@@ -1,6 +1,14 @@
 "use client";
 
-import { Box, Card, CardContent, Skeleton, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Pagination,
+  Skeleton,
+  Typography,
+} from "@mui/material";
+import { useFiltersStore } from "@/features/search/store/filters-store";
 import { useSearchStore } from "@/features/search/store/search-store";
 import { ProviderCard } from "@/features/search/components/provider-card";
 
@@ -61,6 +69,14 @@ export const ProviderCardGrid = () => {
   const searchResult = useSearchStore((s) => s.searchResult);
   const providers = searchResult?.providers ?? [];
   const isLoading = searchResult === null;
+  const page = useFiltersStore((s) => s.page);
+  const setPage = useFiltersStore((s) => s.setPage);
+  const pagination = searchResult?.pagination;
+  const totalPages = pagination?.totalPages ?? 1;
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
 
   if (isLoading) {
     return (
@@ -112,6 +128,26 @@ export const ProviderCardGrid = () => {
         ({searchResult?.pagination?.total ?? providers.length}) voice actors
         found
       </Typography>
+
+      {totalPages > 1 && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mb: 3,
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            color="primary"
+            showFirstButton
+            showLastButton
+          />
+        </Box>
+      )}
+
       <Box
         sx={{
           display: "grid",
@@ -123,6 +159,24 @@ export const ProviderCardGrid = () => {
           <ProviderCard key={provider.id} provider={provider} />
         ))}
       </Box>
+      {totalPages > 1 && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 3,
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            color="primary"
+            showFirstButton
+            showLastButton
+          />
+        </Box>
+      )}
     </Box>
   );
 };

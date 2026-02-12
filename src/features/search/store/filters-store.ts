@@ -59,21 +59,24 @@ export const useFiltersStore = create<FiltersState & FiltersActions>()(
     (set, get) => ({
       ...initialFiltersState,
 
-      setKeywords: (keywords) => set({ keywords }),
+      setKeywords: (keywords) =>
+        set({ keywords, page: DEFAULT_PAGE }),
 
-      setLanguages: (languages) => set({ languages }),
+      setLanguages: (languages) =>
+        set({ languages, page: DEFAULT_PAGE }),
 
-      setVoiceAgeGenders: (voice_age_genders) => set({ voice_age_genders }),
+      setVoiceAgeGenders: (voice_age_genders) =>
+        set({ voice_age_genders, page: DEFAULT_PAGE }),
 
-      setVoiceTypes: (voice_types) => set({ voice_types }),
+      setVoiceTypes: (voice_types) =>
+        set({ voice_types, page: DEFAULT_PAGE }),
 
-      setTones: (tones) => set({ tones }),
+      setTones: (tones) => set({ tones, page: DEFAULT_PAGE }),
 
       setPage: (page) => set({ page: Math.max(1, page) }),
 
-      setFilterIds: (key, ids) => {
-        set({ [key]: idsToCommaString(ids) });
-      },
+      setFilterIds: (key, ids) =>
+        set({ [key]: idsToCommaString(ids), page: DEFAULT_PAGE }),
 
       getFilterIds: (key) => {
         return commaStringToIds(get()[key]);

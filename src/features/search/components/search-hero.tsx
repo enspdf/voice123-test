@@ -10,6 +10,7 @@ import { SearchBar } from "@/features/search/components/search-bar";
 import { POPULAR_SEARCHES } from "@/features/search/constants";
 import { useFiltersStore } from "@/features/search/store/filters-store";
 import { useSearchStore } from "@/features/search/store/search-store";
+import Link from "next/link";
 
 export interface SearchHeroProps {
   slotLeftOfSearchBar?: React.ReactNode;
@@ -91,10 +92,13 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
             />
           </Box>
           <Typography
+            component={Link}
+            href="/"
+            prefetch={true}
             variant="h6"
             fontWeight={700}
             color="text.primary"
-            sx={{ letterSpacing: "-0.02em" }}
+            sx={{ letterSpacing: "-0.02em", textDecoration: "none" }}
           >
             Voice123
           </Typography>
