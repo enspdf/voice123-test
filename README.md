@@ -165,6 +165,23 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 
 ---
 
+### Branch: `TSK-6-display-pro-card-results`
+
+| Date       | Task / activity                                                                | Hours |
+| ---------- | ------------------------------------------------------------------------------ | ----- |
+| 2026-02-12 | Fetched search server side and store information in zustand store              | 0.5   |
+| 2026-02-12 | Created provider/voice actor grid and card with basic information              | 2     |
+| 2026-02-12 | Use attributes in the store to display 1 of each attribute with the label name | 0.5   |
+| 2026-02-12 | Created/adjusted and debugged the player                                       | 1     |
+
+### Task list (this branch)
+
+- Fetched search server side and store information in zustand store
+- Created provider/voice actor grid and card with basic information
+- Created/adjusted and debugged the player
+
+---
+
 ## Future improvements and recommendations
 
 - TODO
@@ -189,3 +206,5 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 - Process and create the base mapper to filter the attributes I've selected to be used as filters.
 - Defined and proposed the initial version of the filters drawer and items position.
 - Generate commit messages.
+- Build audio player
+- Fix and create some unit tests

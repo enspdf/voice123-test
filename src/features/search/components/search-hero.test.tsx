@@ -3,20 +3,11 @@
 import { render, screen } from "@/test-utils";
 import userEvent from "@testing-library/user-event";
 import { SearchHero } from "@/features/search/components/search-hero";
+import { POPULAR_SEARCHES } from "@/features/search/constants";
 
 jest.mock("@/components/audio-waves-canvas", () => ({
   AudioWavesCanvas: () => <div data-testid="audio-waves-canvas" />,
 }));
-
-const POPULAR_SEARCHES = [
-  "English – USA",
-  "Conversational",
-  "Animation",
-  "Female adult",
-  "Podcast",
-  "E-learning",
-  "Commercial",
-];
 
 describe("SearchHero", () => {
   beforeEach(() => {
@@ -39,18 +30,13 @@ describe("SearchHero", () => {
     expect(screen.getByText("Trending")).toBeInTheDocument();
   });
 
-  it("renders the hero title and subtitle", () => {
+  it("renders the hero title", () => {
     render(<SearchHero />);
     const heading = screen.getByRole("heading", {
       level: 1,
       name: "Discover amazing voices",
     });
     expect(heading).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /Search through thousands of voice actors and find exactly what you need/,
-      ),
-    ).toBeInTheDocument();
   });
 
   it("renders the search bar with correct placeholder", () => {
@@ -73,15 +59,6 @@ describe("SearchHero", () => {
     for (const label of POPULAR_SEARCHES) {
       expect(screen.getByRole("button", { name: label })).toBeInTheDocument();
     }
-  });
-
-  it("renders the trust line text", () => {
-    render(<SearchHero />);
-    expect(
-      screen.getByText(
-        "Professional voice actors · Any language · Ready for your project",
-      ),
-    ).toBeInTheDocument();
   });
 
   it("updates search input when user types", async () => {

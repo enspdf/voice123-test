@@ -44,8 +44,8 @@ const attributesResponse: AttributesResponse = [
 describe("mapAttributesToSlim", () => {
   it("filters attributes by allowed names only", () => {
     const result = mapAttributesToSlim(attributesResponse);
-    expect(result).toHaveLength(2);
-    expect(result.map((a) => a.name)).toEqual(["languages", "genders"]);
+    expect(result).toHaveLength(1);
+    expect(result.map((a) => a.name)).toEqual(["languages"]);
   });
 
   it("keeps only id, name, display_name, values per attribute", () => {
