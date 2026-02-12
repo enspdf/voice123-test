@@ -102,9 +102,10 @@ _Update this section as you work. For detailed per-branch logs, you can add `doc
 
 ### Branch: `TSK-4-layout-update-and-search-bar`
 
-| Date       | Task / activity                                                                       | Hours |
-| ---------- | ------------------------------------------------------------------------------------- | ----- |
-| 2026-02-11 | Update layout and theme colors, setup tests configuration and implement search bar UI | 0.5   |
+| Date       | Task / activity                                       | Hours |
+| ---------- | ----------------------------------------------------- | ----- |
+| 2026-02-11 | Update layout and theme colors                        | 0.5   |
+| 2026-02-12 | setup tests configuration and implement search bar UI | 2     |
 
 ### Task list (this branch)
 
