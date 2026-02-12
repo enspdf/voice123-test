@@ -10,8 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Voice123 Search Engine",
-  description: "Voice123 | Search voice actors for your projects",
+  title: "Voice123 | Find voice actors for your project",
+  description:
+    "Find the best voice actors for your project at Voice123. More than 250,000 projects & 4,000,000 auditions submitted! Post a project today!",
 };
 
 export default function RootLayout({
