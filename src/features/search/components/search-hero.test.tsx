@@ -2,7 +2,7 @@
 
 import { render, screen } from "@/test-utils";
 import userEvent from "@testing-library/user-event";
-import { SearchHero } from "@/components/search-hero";
+import { SearchHero } from "@/features/search/components/search-hero";
 
 jest.mock("@/components/audio-waves-canvas", () => ({
   AudioWavesCanvas: () => <div data-testid="audio-waves-canvas" />,

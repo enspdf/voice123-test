@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { getAttributes } from "@/features/attributes/api/attributesApi";
-import type { AttributesResponse } from "@/features/attributes/api/types";
+import type { AttributesSlimResponse } from "@/features/attributes/api/types";
 import { createQueryWrapper } from "@/test-query-utils";
 import {
   attributesQueryKey,
@@ -15,22 +15,12 @@ const mockGetAttributes = getAttributes as jest.MockedFunction<
   typeof getAttributes
 >;
 
-const mockAttributes: AttributesResponse = [
+const mockAttributes: AttributesSlimResponse = [
   {
     id: 1,
-    scope: ["voice_over"],
-    roles: ["providers"],
     name: "languages",
     display_name: "languages",
-    highlight: { scope: ["<em>voice_over</em>"] },
-    values: [
-      {
-        id: 1018,
-        name: "English - USA and Canada",
-        stripe_payouts_enabled: false,
-        enabled: true,
-      },
-    ],
+    values: [{ id: 1018, name: "English - USA and Canada" }],
   },
 ];
 
