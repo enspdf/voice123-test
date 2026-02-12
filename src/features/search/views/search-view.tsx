@@ -17,7 +17,13 @@ import {
   getActiveFiltersCount,
   type FiltersStateFilterKeys,
 } from "@/features/search/store/filters-store";
-import { alpha, Box, useTheme } from "@mui/material";
+import {
+  alpha,
+  Box,
+  useTheme,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 
 type SearchViewProps = {
   attributes?: AttributesSlimResponse;
@@ -35,6 +41,26 @@ const filtersStateSelector = (s: {
   voice_types: s.voice_types,
   tones: s.tones,
 });
+
+export const SearchViewFallback = () => {
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 2,
+      }}
+    >
+      <CircularProgress />
+      <Typography variant="body2" color="text.secondary">
+        Loading…
+      </Typography>
+    </Box>
+  );
+};
 
 const SearchView = ({ attributes = [], providers = null }: SearchViewProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
