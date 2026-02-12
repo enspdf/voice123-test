@@ -1,0 +1,6 @@
+/* Minimal global styles; MUI CssBaseline + default theme own the rest */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
