@@ -99,24 +99,17 @@ describe("useSearchProviders", () => {
     });
   });
 
-  it("does not run the query when keywords are empty and enabled is true", async () => {
+  it("runs the query when keywords are empty (filter-only search)", async () => {
+    mockSearchProviders.mockResolvedValue(mockResult);
     const wrapper = createQueryWrapper();
 
-    renderHook(() => useSearchProviders("", 1), { wrapper });
+    const { result } = renderHook(() => useSearchProviders("", 1), {
+      wrapper,
+    });
 
-    await waitFor(() => {}, { timeout: 100 }).catch(() => {});
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-    expect(mockSearchProviders).not.toHaveBeenCalled();
-  });
-
-  it("does not run the query when keywords are only whitespace", async () => {
-    const wrapper = createQueryWrapper();
-
-    renderHook(() => useSearchProviders("   ", 1), { wrapper });
-
-    await waitFor(() => {}, { timeout: 100 }).catch(() => {});
-
-    expect(mockSearchProviders).not.toHaveBeenCalled();
+    expect(mockSearchProviders).toHaveBeenCalledWith("", 1, {});
   });
 
   it("does not run the query when enabled is false", async () => {

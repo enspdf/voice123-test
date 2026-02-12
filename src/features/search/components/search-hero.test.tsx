@@ -4,6 +4,7 @@ import { render, screen } from "@/test-utils";
 import userEvent from "@testing-library/user-event";
 import { SearchHero } from "@/features/search/components/search-hero";
 import { POPULAR_SEARCHES } from "@/features/search/constants";
+import { useFiltersStore } from "@/features/search/store/filters-store";
 
 jest.mock("@/components/audio-waves-canvas", () => ({
   AudioWavesCanvas: () => <div data-testid="audio-waves-canvas" />,
@@ -11,6 +12,7 @@ jest.mock("@/components/audio-waves-canvas", () => ({
 
 describe("SearchHero", () => {
   beforeEach(() => {
+    useFiltersStore.getState().resetFilters();
     jest.spyOn(console, "log").mockImplementation(() => {});
   });
 
@@ -41,9 +43,7 @@ describe("SearchHero", () => {
 
   it("renders the search bar with correct placeholder", () => {
     render(<SearchHero />);
-    const input = screen.getByPlaceholderText(
-      "Search for voice style, language, or keyword...",
-    );
+    const input = screen.getByPlaceholderText("Find any voice here!");
     expect(input).toBeInTheDocument();
   });
 
@@ -64,9 +64,7 @@ describe("SearchHero", () => {
   it("updates search input when user types", async () => {
     const user = userEvent.setup();
     render(<SearchHero />);
-    const input = screen.getByPlaceholderText(
-      "Search for voice style, language, or keyword...",
-    );
+    const input = screen.getByPlaceholderText("Find any voice here!");
     await user.type(input, "English");
     expect(input).toHaveValue("English");
   });
@@ -74,9 +72,7 @@ describe("SearchHero", () => {
   it("sets search input to chip label when a popular search chip is clicked", async () => {
     const user = userEvent.setup();
     render(<SearchHero />);
-    const input = screen.getByPlaceholderText(
-      "Search for voice style, language, or keyword...",
-    );
+    const input = screen.getByPlaceholderText("Find any voice here!");
     expect(input).toHaveValue("");
     await user.click(screen.getByRole("button", { name: "Podcast" }));
     expect(input).toHaveValue("Podcast");

@@ -12,7 +12,7 @@ const getAttributeValueName = (
   return value?.name ?? null;
 };
 
-function formatLastActive(isoString: string): string | null {
+const formatLastActive = (isoString: string): string | null => {
   const date = new Date(isoString);
   if (Number.isNaN(date.getTime())) return null;
   const now = new Date();
@@ -29,7 +29,7 @@ function formatLastActive(isoString: string): string | null {
   if (diffDays < 30) return `Active ${Math.floor(diffDays / 7)} weeks ago`;
   if (diffDays < 365) return `Active ${Math.floor(diffDays / 30)} months ago`;
   return `Active ${Math.floor(diffDays / 365)} years ago`;
-}
+};
 
 export interface ProviderDisplayData {
   user: VoiceProvider["user"];

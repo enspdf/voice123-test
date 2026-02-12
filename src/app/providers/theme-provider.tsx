@@ -20,13 +20,13 @@ export const ThemeModeContext = createContext<{
   setMode: (mode: PaletteMode) => void;
   toggleMode: () => void;
 }>({
-  mode: "light",
+  mode: "dark",
   setMode: () => {},
   toggleMode: () => {},
 });
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [mode, setModeState] = useState<PaletteMode>("light");
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [mode, setModeState] = useState<PaletteMode>("dark");
 
   const setMode = useCallback((next: PaletteMode) => {
     setModeState(next);
@@ -36,10 +36,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setModeState((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
-  const theme = useMemo(
-    () => createTheme(getDesignTokens(mode)),
-    [mode],
-  );
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   const contextValue = useMemo(
     () => ({ mode, setMode, toggleMode }),
@@ -54,4 +51,4 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       </MuiThemeProvider>
     </ThemeModeContext.Provider>
   );
-}
+};

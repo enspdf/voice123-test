@@ -5,6 +5,8 @@ import type { NormalizedSearchResult } from "@/features/search/api/types";
 type SearchState = {
   searchResult: NormalizedSearchResult | null;
   setSearchResult: (result: NormalizedSearchResult | null) => void;
+  isFetching: boolean;
+  setSearchFetching: (isFetching: boolean) => void;
 };
 
 export const useSearchStore = create<SearchState>()(
@@ -12,6 +14,8 @@ export const useSearchStore = create<SearchState>()(
     (set) => ({
       searchResult: null,
       setSearchResult: (searchResult) => set({ searchResult }),
+      isFetching: false,
+      setSearchFetching: (isFetching) => set({ isFetching }),
     }),
     {
       name: "SearchStore",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Typography, Chip, useTheme, alpha } from "@mui/material";
 import RecordVoiceOverRoundedIcon from "@mui/icons-material/RecordVoiceOverRounded";
 import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
@@ -8,22 +8,32 @@ import { ThemeModeToggle } from "@/components/theme-mode-toggle";
 import { AudioWavesCanvas } from "@/components/audio-waves-canvas";
 import { SearchBar } from "@/features/search/components/search-bar";
 import { POPULAR_SEARCHES } from "@/features/search/constants";
+import { useFiltersStore } from "@/features/search/store/filters-store";
+import { useSearchStore } from "@/features/search/store/search-store";
 
 export interface SearchHeroProps {
   slotLeftOfSearchBar?: React.ReactNode;
 }
 
 export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
-  const [query, setQuery] = useState("");
+  const keywords = useFiltersStore((s) => s.keywords);
+  const setKeywords = useFiltersStore((s) => s.setKeywords);
+  const isFetching = useSearchStore((s) => s.isFetching);
+  const [inputValue, setInputValue] = useState(keywords);
+
+  useEffect(() => {
+    setInputValue(keywords);
+  }, [keywords]);
+
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
   const primary = theme.palette.primary.main;
-  const primaryLight = theme.palette.primary.light;
   const bgDefault = theme.palette.background.default;
   const paper = theme.palette.background.paper;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setKeywords(inputValue);
   };
 
   return (
@@ -170,7 +180,7 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
               label={label}
               size="medium"
               variant="outlined"
-              onClick={() => setQuery(label)}
+              onClick={() => setKeywords(label)}
               sx={{
                 borderRadius: 3,
                 borderColor: alpha(theme.palette.divider, isDark ? 0.6 : 0.5),
@@ -199,11 +209,15 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
           ) : null}
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <SearchBar
-              value={query}
-              onChange={setQuery}
-              onClear={() => setQuery("")}
-              placeholder="Search for voice style, language, or keyword..."
+              value={inputValue}
+              onChange={setInputValue}
+              onClear={() => {
+                setInputValue("");
+                setKeywords("");
+              }}
+              placeholder="Find any voice here!"
               onSubmit={handleSubmit}
+              disabled={isFetching}
             />
           </Box>
         </Box>

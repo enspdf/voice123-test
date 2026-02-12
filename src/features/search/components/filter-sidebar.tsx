@@ -28,11 +28,11 @@ interface FilterSidebarProps {
   onReset: () => void;
 }
 
-export function FilterSidebar({
+export const FilterSidebar = ({
   filters,
   onFilterChange,
   onReset,
-}: FilterSidebarProps) {
+}: FilterSidebarProps) => {
   const attributes = useAttributesStore((s) => s.attributes);
 
   const handleValueToggle = (attributeName: string, valueId: number) => {
@@ -181,4 +181,4 @@ export function FilterSidebar({
       )}
     </Box>
   );
-}
+};
