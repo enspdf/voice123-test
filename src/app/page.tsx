@@ -1,35 +1,45 @@
 import { Container, Typography, Button, Box, Paper } from "@mui/material";
 import Link from "next/link";
+import { ThemeModeToggle } from "@/components/theme-mode-toggle";
 
 export default function Home() {
   return (
     <Container maxWidth="md">
       <Box sx={{ py: 6, display: "flex", flexDirection: "column", gap: 3 }}>
-        <Typography component="h1" variant="h3" gutterBottom>
-          MUI + Next.js
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <ThemeModeToggle />
+        </Box>
+        <Typography component="h1" variant="h3" gutterBottom color="primary">
+          Voice123 theme
         </Typography>
         <Typography color="text.secondary" paragraph>
-          Material UI is running with its default theme — palette, typography,
-          spacing, and components use the predefined values.
+          MUI palette from Voice123 .md-theme-light: primary = accent (blue),
+          secondary = primary (gray), warning = warn (orange). Toggle
+          light/dark above.
         </Typography>
         <Paper sx={{ p: 2 }}>
           <Typography variant="subtitle2" color="primary" gutterBottom>
-            Theme palette
+            Primary (md-accent) · Warning (md-warn)
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            primary, secondary, error, warning, info, success — all from the
-            default MUI theme.
+            #2196f3, #9e9e9e, #ff5722 — background #fff, contrast rgba(0,0,0,.9).
           </Typography>
         </Paper>
         <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
           <Link href="/">
-            <Button variant="contained">Contained</Button>
+            <Button variant="contained" color="primary">
+              Primary
+            </Button>
           </Link>
           <Link href="/">
-            <Button variant="outlined">Outlined</Button>
+            <Button variant="contained" color="warning">
+              Warning (CTA)
+            </Button>
           </Link>
           <Link href="/">
-            <Button variant="text">Text</Button>
+            <Button variant="outlined" color="secondary">
+              Secondary
+            </Button>
           </Link>
         </Box>
       </Box>
