@@ -94,7 +94,6 @@ export const SearchHero = ({ slotLeftOfSearchBar }: SearchHeroProps = {}) => {
           <Typography
             component={Link}
             href="/"
-            prefetch={true}
             variant="h6"
             fontWeight={700}
             color="text.primary"
