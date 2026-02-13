@@ -8,6 +8,11 @@
 
 ---
 
+## Preview URL
+https://voice123-test-green.vercel.app/
+
+---
+
 ## Application setup guide
 
 ### Prerequisites
@@ -205,6 +210,42 @@ npm run build
 
 - Update provider cards grid to add pagination component & set default page on each filter update to get correct responses
 - Update readme, remove .env.example from gitignore to have the example variables.
+
+---
+
+### Branch: `TSK-9-highlight-text-updates`
+
+| Date       | Task / activity                                                             | Hours |
+| ---------- | --------------------------------------------------------------------------- | ----- |
+| 2026-02-12 | Created highlight text component to search keyword coincidences/matches.    | 0.5   |
+| 2026-02-12 | Update book now button and card name links to open profile in a new window. | 0.0   |
+
+### Task list (this branch)
+
+- Created highlight text component to search keyword coincidences/matches.
+- Update book now button and card name links to open profile in a new window.
+
+---
+
+## Future improvements
+
+- **Testing:** Finish unit test coverage and add e2e tests so all test suites are complete.
+- **Observability:** Add error tracking (e.g. Sentry) and optional analytics for search and filter usage to debug issues and understand behavior.
+- **Error pages:** Add custom 400/500 and not-found pages for better error handling.
+- **Mobile:** Improve mobile UI/UX for the search bar and filters.
+- **Code quality:** Set up automated code review (e.g. CodeRabbit) to catch issues before production.
+- **Performance:** Use Redis (or similar) to cache repeated requests and avoid hitting the backend when the same result can be returned.
+- **Data mapping:** Send only the fields the frontend needs from the search response to the stores, instead of the full payload, to reduce store size and load.
+- **Media player:** Improve media player controls (rewind, forward, seconds, audio wave, loaded/unloaded audio).
+
+---
+
+## Recommendations
+
+- Sandbox should allow loading sandbox profiles.
+- Relevant sample URLs broken in some voice over (missing domain).
+- Need more voice actors/variety to test large payloads and heavy pagination.
+- Specify which fields are searched when users enter a keyword.
 
 ---
 

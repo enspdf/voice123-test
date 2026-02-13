@@ -20,6 +20,8 @@ import Link from "next/link";
 import { useAttributesStore } from "@/features/attributes/store/attributes-store";
 import { AudioPlayer } from "@/components/audio-player";
 import { getProviderDisplayData } from "@/features/search/lib/provider-display-data";
+import { HighlightedText } from "@/components/highlighted-text";
+import { useFiltersStore } from "@/features/search/store/filters-store";
 
 interface ProviderCardProps {
   provider: VoiceProvider;
@@ -37,6 +39,7 @@ const getInitials = (name: string): string => {
 export const ProviderCard = ({ provider }: ProviderCardProps) => {
   const theme = useTheme();
   const primary = theme.palette.primary.main;
+  const keywords = useFiltersStore((s) => s.keywords);
   const attributes = useAttributesStore((s) => s.attributes);
   const display = useMemo(
     () => getProviderDisplayData(provider, attributes),
@@ -90,6 +93,7 @@ export const ProviderCard = ({ provider }: ProviderCardProps) => {
               component={Link}
               href={`https://voice123.com/${display.user.username}`}
               prefetch={true}
+              target="_blank"
               variant="subtitle1"
               fontWeight={700}
               color="text.primary"
@@ -106,7 +110,7 @@ export const ProviderCard = ({ provider }: ProviderCardProps) => {
                 },
               }}
             >
-              {display.user.name}
+              <HighlightedText text={display.user.name} term={keywords} />
             </Typography>
             <Typography
               variant="caption"
@@ -118,7 +122,7 @@ export const ProviderCard = ({ provider }: ProviderCardProps) => {
                 whiteSpace: "nowrap",
               }}
             >
-              {display.headline ?? "-"}
+              <HighlightedText text={display.headline ?? "-"} term={keywords} />
             </Typography>
           </Box>
         </Box>
@@ -137,7 +141,30 @@ export const ProviderCard = ({ provider }: ProviderCardProps) => {
             WebkitBoxOrient: "vertical",
           }}
         >
-          {display.summary?.trim() ?? "No summary available."}
+          <HighlightedText
+            text={display.summary?.trim() ?? "No summary available."}
+            term={keywords}
+          />
+        </Typography>
+
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            mb: 1.5,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            lineHeight: 1.4,
+            fontSize: "0.8125rem",
+            display: "-webkit-box",
+            WebkitLineClamp: 1,
+            WebkitBoxOrient: "vertical",
+          }}
+        >
+          <HighlightedText
+            text={provider.additional_details?.trim() ?? ""}
+            term={keywords}
+          />
         </Typography>
 
         <Box
@@ -165,9 +192,7 @@ export const ProviderCard = ({ provider }: ProviderCardProps) => {
           </Box>
           {display.lastActiveLabel && (
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <AccessTimeIcon
-                sx={{ fontSize: 14, color: "text.secondary" }}
-              />
+              <AccessTimeIcon sx={{ fontSize: 14, color: "text.secondary" }} />
               <Typography variant="caption" color="text.secondary">
                 {display.lastActiveLabel}
               </Typography>
@@ -265,6 +290,7 @@ export const ProviderCard = ({ provider }: ProviderCardProps) => {
             component={Link}
             href={`https://voice123.com/${display.user.username}`}
             prefetch={true}
+            target="_blank"
           >
             {display.allow_bookings ? "Book now" : "Unavailable"}
           </Button>
